@@ -2,6 +2,7 @@ import 'package:firebase_authentication/screens/home_screen.dart';
 import 'package:firebase_authentication/screens/login_screen.dart';
 import 'package:firebase_authentication/screens/widgets/custom_button.dart';
 import 'package:firebase_authentication/screens/widgets/custom_input_field.dart';
+import 'package:firebase_authentication/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -24,6 +25,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text('Register')),
@@ -47,14 +50,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     isHidden: true),
                 CustomButton(
                   onPressed: () {
-                    Navigator.push(
+                    authService.signUp(
+                      emailController.text.trim(),
+                      password1Controller.text.trim(),
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
                     );
                     // clearControllers();
-                  }, label: 'Register', icon: const Icon(Icons.app_registration),
+                  },
+                  label: 'Register',
+                  icon: const Icon(Icons.app_registration),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

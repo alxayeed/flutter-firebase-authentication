@@ -8,6 +8,28 @@ import 'package:firebase_core/firebase_core.dart';
 import '../screens/home_screen.dart';
 
 class AuthService {
+  Future signUp(String email, String password, BuildContext context) async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (_, e) {
+      var snackBar = SnackBar(content: Text(e.toString()));
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
+
   Future signIn(String email, String password, BuildContext context) async {
     showDialog(
       context: context,
@@ -20,9 +42,7 @@ class AuthService {
         email: email,
         password: password,
       );
-
     } on FirebaseAuthException catch (_, e) {
-
       const snackBar = SnackBar(
         content: Text('Email or Password incorrect!'),
       );
