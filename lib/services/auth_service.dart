@@ -23,8 +23,9 @@ class AuthService {
         password: password,
       );
     } catch (_, e) {
-      var snackBar = SnackBar(content: Text(e.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      print(e);
+      // var snackBar = SnackBar(content: Text(e.toString()));
+      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);

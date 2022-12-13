@@ -35,6 +35,9 @@ class CustomInputField extends StatelessWidget {
           if (value!.isEmpty) {
             return "$label must be provided";
           }
+          if(isHidden && value.length<8){
+            return 'Should be at least 8 characters';
+          }
           return null;
         },
       ),
