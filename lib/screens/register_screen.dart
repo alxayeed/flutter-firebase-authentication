@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     );
                     // clearControllers();
-                  }, label: 'Register',
+                  }, label: 'Register', icon: const Icon(Icons.app_registration),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -16,10 +16,11 @@ class CustomInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 18.0),
+      padding: const EdgeInsets.only(bottom: 18.0, left: 18.0, right: 18.0),
       child: TextFormField(
         controller: controller,
         obscureText: isHidden,
+        textInputAction: TextInputAction.done,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(

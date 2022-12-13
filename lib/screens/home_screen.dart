@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_authentication/screens/widgets/custom_button.dart';
+import 'package:firebase_authentication/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,10 +8,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthService authService = AuthService();
+    final user = FirebaseAuth.instance.currentUser!;
+    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text('Home')),
-        body: const Center(child: Text('HomePage')),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(child: Text(user.email!)),
+            CustomButton(onPressed: (){
+                FirebaseAuth.instance.signOut();
+            }, label: "Sign out", icon: const Icon(Icons.arrow_back),)
+          ],
+        ),
       ),
     );
   }

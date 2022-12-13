@@ -3,30 +3,27 @@ import 'package:flutter/material.dart';
 import '../home_screen.dart';
 
 class CustomButton extends StatelessWidget {
-  final Function onPressed;
+  final dynamic onPressed;
   final String label;
+  final Icon icon;
   const CustomButton({
     Key? key,
     required this.onPressed,
-    required this.label,
+    required this.label, required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size.fromHeight(50), // NEW
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50), // NEW
+        ),
+        onPressed: onPressed,
+        label: Text(label),
+        icon: icon,
       ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeScreen(),
-          ),
-        );
-        // clearControllers();
-      },
-      child: Text(label),
     );
   }
 }
