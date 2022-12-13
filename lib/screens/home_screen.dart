@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
           children: [
             Center(child: Text(user.email!)),
             CustomButton(onPressed: (){
-                FirebaseAuth.instance.signOut();
+                authService.signOut();
             }, label: "Sign out", icon: const Icon(Icons.arrow_back),)
           ],
         ),

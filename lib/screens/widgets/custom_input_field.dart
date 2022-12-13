@@ -31,7 +31,8 @@ class CustomInputField extends StatelessWidget {
           ),
         ),
         validator: (value) {
-          if (isHidden && value!.isEmpty) {
+          //TODO: validate if valid email address
+          if (value!.isEmpty) {
             return "$label must be provided";
           }
           return null;

@@ -15,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthService authService = AuthService();
@@ -29,50 +30,51 @@ class _LoginScreenState extends State<LoginScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text('Login')),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 100.0),
-              CustomInputField(controller: emailController, label: "Email"),
-              CustomInputField(
-                controller: passwordController,
-                label: "Password",
-                isHidden: true,
-              ),
-              CustomButton(
-                label: 'Login',
-                onPressed: () {
-                  authService.signIn(
-                    emailController.text.trim(),
-                    passwordController.text.trim(),
-                    context
-                  );
-                  FocusScope.of(context).unfocus();
-                }, icon: const Icon(Icons.arrow_forward),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('No Account?'),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const RegisterScreen()),
-                        );
-                        clearControllers();
-                      },
-                      child: const Text('Register here'))
-                ],
-              )
-            ],
+        body: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(height: 100.0),
+                CustomInputField(controller: emailController, label: "Email"),
+                CustomInputField(
+                  controller: passwordController,
+                  label: "Password",
+                  isHidden: true,
+                ),
+                CustomButton(
+                  label: 'Login',
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      authService.signIn(emailController.text.trim(),
+                          passwordController.text.trim(), context);
+                      FocusScope.of(context).unfocus();
+                    }
+                  },
+                  icon: const Icon(Icons.arrow_forward),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('No Account?'),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterScreen()),
+                          );
+                          clearControllers();
+                        },
+                        child: const Text('Register here'))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
-
-
