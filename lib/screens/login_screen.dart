@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  final Function onClickRegister;
+  const LoginScreen({Key? key, required this.onClickRegister}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -60,11 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text('No Account?'),
                     TextButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RegisterScreen()),
-                          );
+                          widget.onClickRegister();
                           clearControllers();
                         },
                         child: const Text('Register here'))

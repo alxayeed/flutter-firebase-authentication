@@ -6,7 +6,11 @@ import 'package:firebase_authentication/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+  final Function onClickLogin;
+  const RegisterScreen({
+    Key? key,
+    required this.onClickLogin,
+  }) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -84,11 +88,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Text('Already registered?'),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()),
-                            );
+                            widget.onClickLogin();
                             clearControllers();
                           },
                           child: const Text('Login here'))

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_authentication/screens/auth_screen.dart';
 import 'package:firebase_authentication/screens/home_screen.dart';
 import 'package:firebase_authentication/screens/login_screen.dart';
 import 'package:firebase_authentication/screens/register_screen.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasData){
             return const HomeScreen();
           } else{
-            return const LoginScreen();
+            return const AuthScreen();
           }
         },
       ),
