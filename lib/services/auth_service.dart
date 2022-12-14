@@ -1,4 +1,5 @@
 import 'package:firebase_authentication/main.dart';
+import 'package:firebase_authentication/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
@@ -22,8 +23,9 @@ class AuthService {
         email: email,
         password: password,
       );
-    } catch (_, e) {
-      print(e);
+    } on FirebaseAuthException catch(e) {
+      Utils.showSnackBar(e.message!);
+      debugPrint(e.toString());
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
@@ -41,13 +43,9 @@ class AuthService {
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (_, e) {
-      const snackBar = SnackBar(
-        backgroundColor: Colors.red,
-        content: Text('Email or Password incorrect!'),
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } on FirebaseAuthException catch(e) {
+      Utils.showSnackBar(e.message!);
+      debugPrint(e.toString());
     }
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
