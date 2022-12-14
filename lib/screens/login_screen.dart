@@ -42,7 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 CustomInputField(
                   controller: passwordController,
                   label: "Password",
-                  isHidden: true,
+                  isPassword: true,
                 ),
                 CustomButton(
                   label: 'Login',

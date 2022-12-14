@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             Center(child: Text(user.email!)),
             CustomButton(onPressed: (){
                 authService.signOut();
-            }, label: "Sign out", icon: const Icon(Icons.arrow_back),)
+            }, label: "Log out", icon: const Icon(Icons.arrow_back),)
           ],
         ),
       ),

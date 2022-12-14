@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class CustomInputField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-  final bool isHidden;
+  final bool isPassword;
 
   const CustomInputField({
     Key? key,
     required this.controller,
     required this.label,
-    this.isHidden=false,
+    this.isPassword=false,
   }) : super(key: key);
 
 
@@ -19,8 +20,9 @@ class CustomInputField extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 18.0, left: 18.0, right: 18.0),
       child: TextFormField(
         controller: controller,
-        obscureText: isHidden,
+        obscureText: isPassword,
         textInputAction: TextInputAction.done,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         decoration: InputDecoration(
           labelText: label,
           border: OutlineInputBorder(
@@ -31,11 +33,13 @@ class CustomInputField extends StatelessWidget {
           ),
         ),
         validator: (value) {
-          //TODO: validate if valid email address
           if (value!.isEmpty) {
             return "$label must be provided";
           }
-          if(isHidden && value.length<8){
+          if(!isPassword && !EmailValidator.validate(value!)){
+            return 'Please enter a valid email';
+          }
+          if(isPassword && value.length<8){
             return 'Should be at least 8 characters';
           }
           return null;

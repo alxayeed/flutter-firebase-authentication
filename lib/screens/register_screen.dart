@@ -1,9 +1,8 @@
-import 'package:firebase_authentication/screens/home_screen.dart';
-import 'package:firebase_authentication/screens/login_screen.dart';
 import 'package:firebase_authentication/screens/widgets/custom_button.dart';
 import 'package:firebase_authentication/screens/widgets/custom_input_field.dart';
 import 'package:firebase_authentication/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class RegisterScreen extends StatefulWidget {
   final Function onClickLogin;
@@ -49,12 +48,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomInputField(
                     controller: password1Controller,
                     label: "Password",
-                    isHidden: true,
+                    isPassword: true,
                   ),
                   CustomInputField(
                       controller: password2Controller,
                       label: "Confirm Password",
-                      isHidden: true),
+                      isPassword: true),
                   CustomButton(
                     onPressed: () {
                       String pass1 = password1Controller.text.trim();

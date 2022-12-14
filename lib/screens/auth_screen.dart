@@ -10,7 +10,7 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool isLogin = false;
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {

@@ -24,8 +24,6 @@ class AuthService {
       );
     } catch (_, e) {
       print(e);
-      // var snackBar = SnackBar(content: Text(e.toString()));
-      // ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
@@ -45,6 +43,7 @@ class AuthService {
       );
     } on FirebaseAuthException catch (_, e) {
       const snackBar = SnackBar(
+        backgroundColor: Colors.red,
         content: Text('Email or Password incorrect!'),
       );
 
