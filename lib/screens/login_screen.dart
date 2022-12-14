@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       FocusScope.of(context).unfocus();
                     }
                   },
-                  icon: const Icon(Icons.arrow_forward),
+                  icon: const Icon(Icons.lock),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

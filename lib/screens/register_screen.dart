@@ -54,24 +54,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomButton(
                     onPressed: () {
                       String pass1 = password1Controller.text.trim();
-                      String pass2 = password1Controller.text.trim();
+                      String pass2 = password2Controller.text.trim();
 
-                      if(_formKey.currentState!.validate() || validatePassword(pass1, pass2)){
+                      if (!validatePassword(pass1, pass2)) {
+                        var snackBar = const SnackBar(
+                          backgroundColor: Colors.red,
+                          content: Text('Password is\'nt matched'),
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                      if (_formKey.currentState!.validate() &&
+                          validatePassword(pass1, pass2)) {
                         authService.signUp(
                           emailController.text.trim(),
                           password1Controller.text.trim(),
                           context,
                         );
                       }
-                      if(!validatePassword(pass1, pass2)){
-                        var snackBar = const SnackBar(content: Text('Password is\'nt match'));
 
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
                       // clearControllers();
                     },
                     label: 'Register',
-                    icon: const Icon(Icons.app_registration),
+                    icon: const Icon(Icons.account_circle_rounded),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -98,8 +103,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  bool validatePassword(String pass1, String pass2){
-    if(pass1 != pass2){
+  bool validatePassword(String pass1, String pass2) {
+    if (pass1 != pass2) {
       return false;
     }
     return true;
