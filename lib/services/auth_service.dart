@@ -72,4 +72,13 @@ class AuthService {
       Navigator.pop(context);
     }
   }
+
+  Future verifyEmail(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.currentUser!.sendEmailVerification();
+    } on FirebaseAuthException catch (e) {
+      Utils.showSnackBar(e.message.toString());
+      Navigator.pop(context);
+    }
+  }
 }

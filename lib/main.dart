@@ -3,10 +3,11 @@ import 'package:firebase_authentication/screens/auth_screen.dart';
 import 'package:firebase_authentication/screens/home_screen.dart';
 import 'package:firebase_authentication/screens/login_screen.dart';
 import 'package:firebase_authentication/screens/register_screen.dart';
+import 'package:firebase_authentication/screens/verify_email_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -30,14 +31,14 @@ class MyApp extends StatelessWidget {
       ),
       home: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
-          } else if(snapshot.hasError){
+          } else if (snapshot.hasError) {
             return const Text('Error occurred');
-          } else if (snapshot.hasData){
-            return const HomeScreen();
-          } else{
+          } else if (snapshot.hasData) {
+            return const VerifyEmailScreen();
+          } else {
             return const AuthScreen();
           }
         },
@@ -45,4 +46,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
