@@ -36,7 +36,7 @@ class CustomInputField extends StatelessWidget {
           if (value!.isEmpty) {
             return "$label must be provided";
           }
-          if(!isPassword && !EmailValidator.validate(value!)){
+          if(!isPassword && !EmailValidator.validate(value)){
             return 'Please enter a valid email';
           }
           if(isPassword && value.length<8){

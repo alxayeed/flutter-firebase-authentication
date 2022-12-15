@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_authentication/screens/register_screen.dart';
 import 'package:firebase_authentication/screens/widgets/custom_button.dart';
 import 'package:firebase_authentication/screens/widgets/custom_input_field.dart';
+import 'package:firebase_authentication/screens/reset_password_screen.dart';
 import 'package:firebase_authentication/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,9 @@ import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   final Function onClickRegister;
-  const LoginScreen({Key? key, required this.onClickRegister}) : super(key: key);
+
+  const LoginScreen({Key? key, required this.onClickRegister})
+      : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -54,6 +57,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   },
                   icon: const Icon(Icons.lock),
+                ),
+                const SizedBox(height: 10.0),
+                GestureDetector(
+                  child: const Text(
+                    'Forgot Password?',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ResetPasswordScreen(),
+                        ));
+                  },
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
