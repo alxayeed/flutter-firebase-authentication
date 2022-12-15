@@ -2,44 +2,51 @@
 
 ### A flutter project to demonstrate different firebase authentications.
 
+In this project, firebase is integrated with flutter with different authenticatin features.
+
 <hr>
 
-## Showcase
 
-<table>
-  <tr>
-    <td></td>
-    <td></td>
-  </tr>
 
-  <tr>
-    <td><img src="ss/list.png" width="100%" height="70%" /></td>
-    <td><img src="ss/details" width="100%" height="70%" /></td>
-  </tr>
+## Features
 
- </table>
+- User Registration
+- Login
+- Email Verification
+- Forgot Password
+
 <br/>
 
 ## Stacks
 
 - Dart
 - Flutter
+- Firebase
 
 <br/>
 
 ## Topics
 
-1. [MaterialApp]()
-2. [Scaffold]()
-3. [AppBar]()
+1. Firebase Authentication
 
 
 <br/>
 
-## Docs and References
+## Showcase
 
-```
-1.
-2.
-3.
-```
+<table>
+
+
+  <tr>
+    <td><img src="ss/register.png" width="100%" height="70%" /></td>
+    <td><img src="ss/login.png" width="100%" height="70%" /></td>
+        <td><img src="ss/verify.png" width="100%" height="70%" /></td>
+  </tr>
+  <tr>
+    <td><img src="ss/forgot.png" width="100%" height="70%" /></td>
+    <td><img src="ss/welcome.png" width="100%" height="70%" /></td>
+
+  </tr>
+
+ </table>
+<br/>
