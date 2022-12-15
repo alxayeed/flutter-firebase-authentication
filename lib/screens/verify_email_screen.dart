@@ -92,8 +92,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
 
   Future sendVerificationEmail() async {
     try {
-      final user = FirebaseAuth.instance.currentUser!;
-      await user.sendEmailVerification();
+      authService.verifyEmail();
     } catch (e) {
       Utils.showSnackBar(e.toString());
     }

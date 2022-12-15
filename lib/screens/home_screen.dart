@@ -10,17 +10,22 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthService authService = AuthService();
     final user = FirebaseAuth.instance.currentUser!;
-    print(user);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: const Text('Home')),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(child: Text(user.email!)),
-            CustomButton(onPressed: (){
+            Center(
+                child: Text('Welcome! You are logged in as\n ${user.email!}')),
+            const SizedBox(height: 50),
+            CustomButton(
+              onPressed: () {
                 authService.signOut();
-            }, label: "Log out", icon: const Icon(Icons.arrow_back),)
+              },
+              label: "Log out",
+              icon: const Icon(Icons.arrow_back),
+            )
           ],
         ),
       ),
