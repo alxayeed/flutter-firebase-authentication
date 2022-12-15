@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_authentication/screens/home_screen.dart';
 import 'package:firebase_authentication/screens/widgets/custom_button.dart';
 import 'package:firebase_authentication/services/auth_service.dart';
+import 'package:firebase_authentication/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
@@ -25,11 +26,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (!isEmailVerified) {
-      authService.verifyEmail(context);
-
-      setState(() {
-        canResendEmail = false;
-      });
+      sendVerificationEmail();
 
       timer = Timer.periodic(
         const Duration(seconds: 3),
@@ -44,21 +41,6 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
   void dispose() {
     timer!.cancel();
     super.dispose();
-  }
-
-  void checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser!.reload();
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-    if (isEmailVerified) {
-      timer!.cancel();
-    } else {
-      await Future.delayed(const Duration(seconds: 5));
-      setState(() {
-        canResendEmail = true;
-      });
-    }
   }
 
   @override
@@ -80,11 +62,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   ),
                 ),
                 CustomButton(
-                  onPressed: canResendEmail
-                      ? () {
-                          authService.verifyEmail(context);
-                        }
-                      : null,
+                  onPressed: canResendEmail ? sendVerificationEmail : null,
                   label: "Resend email",
                   icon: const Icon(Icons.email),
                 ),
@@ -100,5 +78,32 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
               ],
             ),
           );
+  }
+
+  void checkEmailVerified() async {
+    await FirebaseAuth.instance.currentUser!.reload();
+    setState(() {
+      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+    });
+    if (isEmailVerified) {
+      timer!.cancel();
+    }
+  }
+
+  Future sendVerificationEmail() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser!;
+      await user.sendEmailVerification();
+    } catch (e) {
+      Utils.showSnackBar(e.toString());
+    }
+
+    setState(() {
+      canResendEmail = false;
+    });
+    await Future.delayed(const Duration(seconds: 5));
+    setState(() {
+      canResendEmail = true;
+    });
   }
 }
