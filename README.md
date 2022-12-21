@@ -14,6 +14,7 @@ In this project, firebase is integrated with flutter with different authenticati
 - Login
 - Email Verification
 - Forgot Password
+- Google Authentication
 
 <br/>
 
@@ -28,6 +29,7 @@ In this project, firebase is integrated with flutter with different authenticati
 ## Topics
 
 1. Firebase Authentication
+2. Google Sign in
 
 
 <br/>
@@ -45,7 +47,14 @@ In this project, firebase is integrated with flutter with different authenticati
   <tr>
     <td><img src="ss/forgot.png" width="100%" height="70%" /></td>
     <td><img src="ss/welcome.png" width="100%" height="70%" /></td>
-
+  </tr>
+    <tr>
+    <td>Google sign in</td>
+    <td>Accounts </td>
+  </tr>
+  <tr>
+    <td><img src="ss/google.png" width="100%" height="70%" /></td>
+    <td><img src="ss/accounts.png" width="100%" height="70%" /></td>
   </tr>
 
  </table>
