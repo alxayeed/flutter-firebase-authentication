@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../screens/home_screen.dart';
 
@@ -50,8 +51,9 @@ class AuthService {
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
-  signOut() {
+  signOut() async {
     FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
   }
 
   Future resetPassword(String email, BuildContext context) async {
@@ -79,5 +81,24 @@ class AuthService {
     } on FirebaseAuthException catch (e) {
       Utils.showSnackBar(e.message.toString());
     }
+  }
+
+  Future googleSignIn() async {
+    final GoogleSignInAccount? googleSignInAccount =
+        await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
+    final AuthCredential authCredential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
+
+    var result =
+        await FirebaseAuth.instance.signInWithCredential(authCredential);
+
+    var user = result.user;
+
+    // if(user!=null){
+    //   Navigator.push(context, route)
+    // }
   }
 }
